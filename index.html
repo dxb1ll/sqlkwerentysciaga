@@ -215,6 +215,93 @@ FROM użytkownicy;</code></pre>
                 <li><code>ELSE</code>: Ustawia wartość domyślną, jeśli żaden warunek nie został spełniony.</li>
             </ul>
         </section>
+        <section class="mb-5">
+            <h2>13. Tworzenie użytkowników i uprawnienia</h2>
+            <p>Podstawowe operacje na użytkownikach bazy danych:</p>
+            <pre><code>-- Tworzenie nowego użytkownika
+CREATE USER 'nowy_user'@'localhost' IDENTIFIED BY 'haslo123';
+
+-- Nadawanie wszystkich uprawnień do bazy
+GRANT ALL PRIVILEGES ON baza_danych.* TO 'nowy_user'@'localhost';
+
+-- Nadawanie wybranych uprawnień
+GRANT SELECT, INSERT, UPDATE ON baza_danych.* TO 'nowy_user'@'localhost';
+
+-- Odświeżenie uprawnień
+FLUSH PRIVILEGES;
+
+-- Usuwanie użytkownika
+DROP USER 'nowy_user'@'localhost';</code></pre>
+        </section>
+
+        <section class="mb-5">
+            <h2>14. Zarządzanie bazą danych</h2>
+            <p>Podstawowe operacje na bazach danych:</p>
+            <pre><code>-- Tworzenie bazy danych
+CREATE DATABASE nazwa_bazy;
+
+-- Wybór bazy danych
+USE nazwa_bazy;
+
+-- Usuwanie bazy danych
+DROP DATABASE nazwa_bazy;
+
+-- Wyświetlanie dostępnych baz
+SHOW DATABASES;</code></pre>
+        </section>
+
+        <section class="mb-5">
+            <h2>15. Modyfikacja struktury tabel</h2>
+            <p>Zmiany w strukturze istniejących tabel:</p>
+            <pre><code>-- Dodawanie kolumny
+ALTER TABLE użytkownicy ADD telefon VARCHAR(15);
+
+-- Usuwanie kolumny
+ALTER TABLE użytkownicy DROP COLUMN telefon;
+
+-- Zmiana typu kolumny
+ALTER TABLE użytkownicy MODIFY email VARCHAR(150);
+
+-- Zmiana nazwy kolumny
+ALTER TABLE użytkownicy CHANGE stary_email nowy_email VARCHAR(100);</code></pre>
+        </section>
+
+        <section class="mb-5">
+            <h2>16. Podstawowe operacje na kolumnach</h2>
+            <p>Najczęściej używane funkcje na kolumnach:</p>
+            <pre><code>-- Zliczanie rekordów
+SELECT COUNT(*) FROM użytkownicy;
+
+-- Suma wartości
+SELECT SUM(cena) FROM zamowienia;
+
+-- Największa wartość
+SELECT MAX(cena) FROM produkty;
+
+-- Najmniejsza wartość
+SELECT MIN(cena) FROM produkty;
+
+-- Średnia wartość
+SELECT AVG(cena) FROM produkty;</code></pre>
+        </section>
+
+        <section class="mb-5">
+            <h2>17. Kopiowanie danych między tabelami</h2>
+            <p>Operacje kopiowania i przenoszenia danych:</p>
+            <pre><code>-- Kopiowanie danych do nowej tabeli
+CREATE TABLE nowa_tabela AS
+SELECT * FROM stara_tabela;
+
+-- Kopiowanie wybranych kolumn
+INSERT INTO tabela2 (imie, nazwisko)
+SELECT imie, nazwisko FROM tabela1;
+
+-- Kopiowanie z warunkiem
+INSERT INTO archiwum_uzytkownikow
+SELECT * FROM użytkownicy
+WHERE data_rejestracji < '2023-01-01';</code></pre>
+        </section>
+        
     </main>
     <footer class="text-center my-4">
         <p>&copy; dxb1l</p>
