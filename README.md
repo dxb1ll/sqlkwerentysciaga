@@ -1,0 +1,2 @@
+# sqlkwerentysciaga
+strona z sql
