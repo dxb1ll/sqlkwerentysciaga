@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przydatne Kwerendy JavaScript - INF.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        a {
+            color: #0d6efd;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="container my-4">
+        <h1 class="text-center">Przydatne Kwerendy JavaScript - INF.03</h1>
+    </header>
+    <main class="container">
+        <!-- Deklaracja zmiennych -->
+        <section class="mb-5">
+            <h2>1. Deklaracja zmiennych</h2>
+            <p>W JavaScript można deklarować zmienne za pomocą <code>var</code>, <code>let</code> oraz <code>const</code>. Przykłady:</p>
+            <pre><code>// Deklaracja zmiennej za pomocą var
+var zmienna1 = 'Hello, World!';
+
+// Deklaracja zmiennej za pomocą let
+let zmienna2 = 42;
+
+// Deklaracja stałej za pomocą const
+const zmienna3 = true;
+</code></pre>
+        </section>
+        
+        <!-- Funkcje -->
+        <section class="mb-5">
+            <h2>2. Funkcje</h2>
+            <p>Funkcje w JavaScript mogą być deklarowane na kilka sposobów. Przykłady:</p>
+            <pre><code>// Deklaracja funkcji
+function dodaj(a, b) {
+    return a + b;
+}
+
+// Funkcja anonimowa przypisana do zmiennej
+const odejmij = function(a, b) {
+    return a - b;
+};
+
+// Funkcja strzałkowa
+const pomnoz = (a, b) => a * b;
+</code></pre>
+        </section>
+        
+        <!-- Pętle -->
+        <section class="mb-5">
+            <h2>3. Pętle</h2>
+            <p>JavaScript obsługuje różne rodzaje pętli. Przykłady:</p>
+            <pre><code>// Pętla for
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+// Pętla while
+let j = 0;
+while (j < 10) {
+    console.log(j);
+    j++;
+}
+
+// Pętla do...while
+let k = 0;
+do {
+    console.log(k);
+    k++;
+} while (k < 10);
+</code></pre>
+        </section>
+        
+        <!-- Warunki -->
+        <section class="mb-5">
+            <h2>4. Warunki</h2>
+            <p>Instrukcje warunkowe w JavaScript. Przykłady:</p>
+            <pre><code>// Instrukcja if...else
+let x = 10;
+if (x > 5) {
+    console.log('x jest większe niż 5');
+} else {
+    console.log('x jest mniejsze lub równe 5');
+}
+
+// Instrukcja switch
+let y = 'apple';
+switch (y) {
+    case 'banana':
+        console.log('To jest banan');
+        break;
+    case 'apple':
+        console.log('To jest jabłko');
+        break;
+    default:
+        console.log('Nieznany owoc');
+}
+</code></pre>
+        </section>
+        
+        <!-- Tablice -->
+        <section class="mb-5">
+            <h2>5. Tablice</h2>
+            <p>Praca z tablicami w JavaScript. Przykłady:</p>
+            <pre><code>// Tworzenie tablicy
+let tablica = [1, 2, 3, 4, 5];
+
+// Dostęp do elementów tablicy
+console.log(tablica[0]); // 1
+
+// Iteracja po tablicy
+tablica.forEach(element => {
+    console.log(element);
+});
+</code></pre>
+        </section>
+        
+        <!-- Obiekty -->
+        <section class="mb-5">
+            <h2>6. Obiekty</h2>
+            <p>Tworzenie i manipulacja obiektami w JavaScript. Przykłady:</p>
+            <pre><code>// Tworzenie obiektu
+let osoba = {
+    imie: 'Jan',
+    nazwisko: 'Kowalski',
+    wiek: 30
+};
+
+// Dostęp do właściwości obiektu
+console.log(osoba.imie); // Jan
+
+// Dodawanie nowej właściwości
+osoba.email = 'jan.kowalski@example.com';
+</code></pre>
+        </section>
+        
+        <!-- Manipulacja DOM -->
+        <section class="mb-5">
+            <h2>7. Manipulacja DOM</h2>
+            <p>Manipulacja elementami DOM za pomocą JavaScript. Przykłady:</p>
+            <pre><code>// Pobieranie elementu
+let element = document.getElementById('moj-element');
+
+// Zmiana tekstu elementu
+element.textContent = 'Nowy tekst';
+
+// Dodawanie klasy do elementu
+element.classList.add('nowa-klasa');
+</code></pre>
+        </section>
+        
+        <!-- Obsługa zdarzeń -->
+        <section class="mb-5">
+            <h2>8. Obsługa zdarzeń</h2>
+            <p>Obsługa zdarzeń w JavaScript. Przykłady:</p>
+            <pre><code>// Dodawanie nasłuchiwacza zdarzeń
+let przycisk = document.getElementById('moj-przycisk');
+przycisk.addEventListener('click', () => {
+    alert('Przycisk został kliknięty!');
+});
+</code></pre>
+        </section>
+        
+        <!-- Asynchroniczność -->
+        <section class="mb-5">
+            <h2>9. Asynchroniczność</h2>
+            <p>Praca z kodem asynchronicznym w JavaScript. Przykłady:</p>
+            <pre><code>// Użycie funkcji setTimeout
+setTimeout(() => {
+    console.log('To jest opóźniona wiadomość');
+}, 2000);
+
+// Użycie funkcji fetch do pobierania danych
+fetch('https://api.example.com/dane')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Błąd:', error));
+</code></pre>
+        </section>
+        
+        <!-- Promisy -->
+        <section class="mb-5">
+            <h2>10. Promisy</h2>
+            <p>Praca z promisami w JavaScript. Przykłady:</p>
+            <pre><code>// Tworzenie promisa
+let obietnica = new Promise((resolve, reject) => {
+    let sukces = true;
+    if (sukces) {
+        resolve('Operacja zakończona sukcesem');
+    } else {
+        reject('Operacja zakończona niepowodzeniem');
+    }
+});
+
+// Obsługa promisa
+obietnica
+    .then(wiadomosc => console.log(wiadomosc))
+    .catch(error => console.error(error));
+</code></pre>
+        </section>
+        
+        <!-- Async/Await -->
+        <section class="mb-5">
+            <h2>11. Async/Await</h2>
+            <p>Użycie async/await do pracy z kodem asynchronicznym. Przykłady:</p>
+            <pre><code>// Funkcja asynchroniczna
+async function pobierzDane() {
+    try {
+        let response = await fetch('https://api.example.com/dane');
+        let data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Błąd:', error);
+    }
+}
+
+// Wywołanie funkcji
+pobierzDane();
+</code></pre>
+        </section>
+        
+        <!-- Moduły -->
+        <section class="mb-5">
+            <h2>12. Moduły</h2>
+            <p>Importowanie i eksportowanie modułów w JavaScript. Przykłady:</p>
+            <pre><code>// Eksportowanie funkcji w module
+export function dodaj(a, b) {
+    return a + b;
+}
+
+// Importowanie funkcji z modułu
+import { dodaj } from './modul.js';
+console.log(dodaj(2, 3)); // 5
+</code></pre>
+        </section>
+        
+        <!-- AJAX -->
+        <section class="mb-5">
+            <h2>13. AJAX</h2>
+            <p>Użycie AJAX do komunikacji z serwerem. Przykłady:</p>
+            <pre><code>// Tworzenie obiektu XMLHttpRequest
+let xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.example.com/dane', true);
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        console.log(JSON.parse(xhr.responseText));
+    } else {
+        console.error('Błąd:', xhr.statusText);
+    }
+};
+xhr.onerror = function() {
+    console.error('Błąd sieci');
+};
+xhr.send();
+</code></pre>
+        </section>
+        
+        <!-- Formularze -->
+        <section class="mb-5">
+            <h2>14. Formularze</h2>
+            <p>Praca z formularzami w JavaScript. Przykłady:</p>
+            <pre><code>// Pobieranie danych z formularza
+let formularz = document.getElementById('moj-formularz');
+formularz.addEventListener('submit', function(event) {
+    event.preventDefault();
+    let dane = new FormData(formularz);
+    console.log(dane.get('nazwa-pola'));
+});
+</code></pre>
+        </section>
+        
+        <!-- Walidacja -->
+        <section class="mb-5">
+            <h2>15. Walidacja</h2>
+            <p>Walidacja danych w JavaScript. Przykłady:</p>
+            <pre><code>// Prosta walidacja formularza
+let emailInput = document.getElementById('email');
+emailInput.addEventListener('input', function() {
+    if (emailInput.validity.typeMismatch) {
+        emailInput.setCustomValidity('Proszę podać poprawny adres email.');
+    } else {
+        emailInput.setCustomValidity('');
+    }
+});
+</code></pre>
+        </section>
+    </main>
+    <footer class="text-center my-4">
+        <p>&copy; dxb1l</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
