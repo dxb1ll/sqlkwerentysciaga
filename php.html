@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przydatne Kwerendy PHP - INF.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        a {
+            color: #0d6efd;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="container my-4">
+        <h1 class="text-center">Przydatne Kwerendy PHP - INF.03</h1>
+    </header>
+    <main class="container">
+        <!-- Deklaracja zmiennych -->
+        <section class="mb-5">
+            <h2>1. Deklaracja zmiennych</h2>
+            <p>W PHP można deklarować zmienne za pomocą znaku dolara <code>$</code>. Przykłady:</p>
+            <pre><code>// Deklaracja zmiennej
+$zmienna1 = 'Hello, World!';
+
+// Deklaracja zmiennej liczbowej
+$zmienna2 = 42;
+
+// Deklaracja zmiennej logicznej
+$zmienna3 = true;
+</code></pre>
+        </section>
+        
+        <!-- Funkcje -->
+        <section class="mb-5">
+            <h2>2. Funkcje</h2>
+            <p>Funkcje w PHP mogą być deklarowane za pomocą słowa kluczowego <code>function</code>. Przykłady:</p>
+            <pre><code>// Deklaracja funkcji
+function dodaj($a, $b) {
+    return $a + $b;
+}
+
+// Funkcja anonimowa przypisana do zmiennej
+$odejmij = function($a, $b) {
+    return $a - $b;
+};
+
+// Funkcja strzałkowa (PHP 7.4+)
+$pomnoz = fn($a, $b) => $a * $b;
+</code></pre>
+        </section>
+        
+        <!-- Pętle -->
+        <section class="mb-5">
+            <h2>3. Pętle</h2>
+            <p>PHP obsługuje różne rodzaje pętli. Przykłady:</p>
+            <pre><code>// Pętla for
+for ($i = 0; $i < 10; $i++) {
+    echo $i;
+}
+
+// Pętla while
+$j = 0;
+while ($j < 10) {
+    echo $j;
+    $j++;
+}
+
+// Pętla do...while
+$k = 0;
+do {
+    echo $k;
+    $k++;
+} while ($k < 10);
+</code></pre>
+        </section>
+        
+        <!-- Warunki -->
+        <section class="mb-5">
+            <h2>4. Warunki</h2>
+            <p>Instrukcje warunkowe w PHP. Przykłady:</p>
+            <pre><code>// Instrukcja if...else
+$x = 10;
+if ($x > 5) {
+    echo 'x jest większe niż 5';
+} else {
+    echo 'x jest mniejsze lub równe 5';
+}
+
+// Instrukcja switch
+$y = 'apple';
+switch ($y) {
+    case 'banana':
+        echo 'To jest banan';
+        break;
+    case 'apple':
+        echo 'To jest jabłko';
+        break;
+    default:
+        echo 'Nieznany owoc';
+}
+</code></pre>
+        </section>
+        
+        <!-- Tablice -->
+        <section class="mb-5">
+            <h2>5. Tablice</h2>
+            <p>Praca z tablicami w PHP. Przykłady:</p>
+            <pre><code>// Tworzenie tablicy
+$tablica = [1, 2, 3, 4, 5];
+
+// Dostęp do elementów tablicy
+echo $tablica[0]; // 1
+
+// Iteracja po tablicy
+foreach ($tablica as $element) {
+    echo $element;
+}
+</code></pre>
+        </section>
+        
+        <!-- Obiekty -->
+        <section class="mb-5">
+            <h2>6. Obiekty</h2>
+            <p>Tworzenie i manipulacja obiektami w PHP. Przykłady:</p>
+            <pre><code>// Tworzenie obiektu
+class Osoba {
+    public $imie;
+    public $nazwisko;
+    public $wiek;
+
+    public function __construct($imie, $nazwisko, $wiek) {
+        $this->imie = $imie;
+        $this->nazwisko = $nazwisko;
+        $this->wiek = $wiek;
+    }
+}
+
+$osoba = new Osoba('Jan', 'Kowalski', 30);
+
+// Dostęp do właściwości obiektu
+echo $osoba->imie; // Jan
+
+// Dodawanie nowej właściwości
+$osoba->email = 'jan.kowalski@example.com';
+</code></pre>
+        </section>
+        
+        <!-- Manipulacja DOM -->
+        <section class="mb-5">
+            <h2>7. Manipulacja DOM</h2>
+            <p>Manipulacja elementami DOM za pomocą PHP. Przykłady:</p>
+            <pre><code>// Pobieranie elementu
+$element = $_GET['moj-element'];
+
+// Zmiana tekstu elementu
+$element = 'Nowy tekst';
+
+// Dodawanie klasy do elementu
+$element .= ' nowa-klasa';
+</code></pre>
+        </section>
+        
+        <!-- Obsługa zdarzeń -->
+        <section class="mb-5">
+            <h2>8. Obsługa zdarzeń</h2>
+            <p>Obsługa zdarzeń w PHP. Przykłady:</p>
+            <pre><code>// Dodawanie nasłuchiwacza zdarzeń
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo 'Przycisk został kliknięty!';
+}
+</code></pre>
+        </section>
+        
+        <!-- Asynchroniczność -->
+        <section class="mb-5">
+            <h2>9. Asynchroniczność</h2>
+            <p>Praca z kodem asynchronicznym w PHP. Przykłady:</p>
+            <pre><code>// Użycie funkcji sleep
+sleep(2);
+echo 'To jest opóźniona wiadomość';
+
+// Użycie funkcji file_get_contents do pobierania danych
+$data = file_get_contents('https://api.example.com/dane');
+echo $data;
+</code></pre>
+        </section>
+        
+        <!-- Formularze -->
+        <section class="mb-5">
+            <h2>10. Formularze</h2>
+            <p>Praca z formularzami w PHP. Przykłady:</p>
+            <pre><code>// Pobieranie danych z formularza
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $dane = $_POST['nazwa-pola'];
+    echo $dane;
+}
+</code></pre>
+        </section>
+        
+        <!-- Walidacja -->
+        <section class="mb-5">
+            <h2>11. Walidacja</h2>
+            <p>Walidacja danych w PHP. Przykłady:</p>
+            <pre><code>// Prosta walidacja formularza
+$emailInput = $_POST['email'];
+if (!filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
+    echo 'Proszę podać poprawny adres email.';
+} else {
+    echo 'Adres email jest poprawny.';
+}
+</code></pre>
+        </section>
+    </main>
+    <footer class="text-center my-4">
+        <p>&copy; dxb1l</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
