@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Przydatne Kwerendy MySQL - INF.03</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        a {
+            color: #0d6efd;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="container my-4">
+        <h1 class="text-center">Przydatne Kwerendy MySQL - INF.03</h1>
+    </header>
+    <main class="container">
+        <section class="mb-5">
+            <h2>1. Tworzenie tabel</h2>
+            <p>Tabele są podstawową strukturą w bazie danych. Poniższy przykład pokazuje, jak stworzyć tabelę "użytkownicy" z różnymi typami danych i ograniczeniami:</p>
+            <pre><code>CREATE TABLE użytkownicy (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    imie VARCHAR(50) NOT NULL,
+    nazwisko VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    data_rejestracji DATE DEFAULT CURRENT_DATE
+);
+</code></pre>
+            <p>W powyższym przykładzie:</p>
+            <ul>
+                <li><code>id</code>: Jest to klucz główny, czyli unikalny identyfikator każdego rekordu. Jest automatycznie zwiększany dzięki <code>AUTO_INCREMENT</code>.</li>
+                <li><code>imie</code> i <code>nazwisko</code>: Są to kolumny przechowujące dane tekstowe o długości maksymalnej 50 znaków. Parametr <code>NOT NULL</code> oznacza, że te pola muszą być wypełnione.</li>
+                <li><code>email</code>: Pole tekstowe, które musi być unikalne dzięki parametrze <code>UNIQUE</code>. Przydatne do przechowywania adresów e-mail.</li>
+                <li><code>data_rejestracji</code>: Pole typu data, które domyślnie ustawia bieżącą datę, jeśli wartość nie zostanie podana podczas wstawiania danych.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>2. Wstawianie danych</h2>
+            <p>Zapytanie <code>INSERT</code> pozwala na dodawanie nowych rekordów do tabeli. Przykład:</p>
+            <pre><code>INSERT INTO użytkownicy (imie, nazwisko, email, data_rejestracji)
+VALUES ('Anna', 'Nowak', 'anna.nowak@example.com', '2023-10-15');
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>INSERT INTO użytkownicy</code>: Wskazuje tabelę, do której dodajemy dane.</li>
+                <li>Kolumny: <code>imie</code>, <code>nazwisko</code>, <code>email</code>, <code>data_rejestracji</code> to nazwy kolumn, do których będą wstawiane wartości.</li>
+                <li>Wartości: Są wstawiane w tej samej kolejności, w jakiej podano kolumny. Np. "Anna" trafi do kolumny <code>imie</code>.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>3. Pobieranie danych</h2>
+            <p>Zapytanie <code>SELECT</code> pozwala na wyświetlenie danych z tabeli. Przykład z filtrowaniem:</p>
+            <pre><code>SELECT imie, nazwisko, email
+FROM użytkownicy
+WHERE data_rejestracji > '2023-01-01'
+ORDER BY nazwisko ASC;
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>SELECT</code>: Wskazuje kolumny, które chcemy pobrać. Można użyć <code>*</code>, aby pobrać wszystkie kolumny.</li>
+                <li><code>FROM użytkownicy</code>: Wskazuje tabelę, z której chcemy pobrać dane.</li>
+                <li><code>WHERE</code>: Filtruje dane. W tym przykładzie wybieramy tylko rekordy, gdzie <code>data_rejestracji</code> jest późniejsza niż 2023-01-01.</li>
+                <li><code>ORDER BY</code>: Sortuje wyniki według kolumny <code>nazwisko</code> w porządku rosnącym (ASC).</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>4. Aktualizacja danych</h2>
+            <p>Zapytanie <code>UPDATE</code> pozwala na modyfikację istniejących danych. Przykład:</p>
+            <pre><code>UPDATE użytkownicy
+SET email = 'nowy.email@example.com'
+WHERE imie = 'Jan' AND nazwisko = 'Kowalski';
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>UPDATE użytkownicy</code>: Wskazuje tabelę, którą aktualizujemy.</li>
+                <li><code>SET</code>: Określa kolumny, które mają zostać zmienione, oraz nowe wartości.</li>
+                <li><code>WHERE</code>: Ogranicza zmiany do rekordów spełniających warunek. W tym przykładzie zmieniamy e-mail tylko dla Jana Kowalskiego.</li>
+            </ul>
+            <p>Ostrzeżenie: Brak <code>WHERE</code> spowoduje aktualizację wszystkich rekordów w tabeli!</p>
+        </section>
+        <section class="mb-5">
+            <h2>5. Usuwanie danych</h2>
+            <p>Zapytanie <code>DELETE</code> usuwa dane z tabeli. Przykład:</p>
+            <pre><code>DELETE FROM użytkownicy
+WHERE id = 2;
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>DELETE FROM użytkownicy</code>: Określa tabelę, z której chcemy usunąć dane.</li>
+                <li><code>WHERE id = 2</code>: Usuwa tylko rekord z <code>id</code> równym 2.</li>
+            </ul>
+            <p>Ostrzeżenie: Brak <code>WHERE</code> usunie wszystkie rekordy z tabeli!</p>
+        </section>
+        <section class="mb-5">
+            <h2>6. Łączenie tabel (JOIN)</h2>
+            <p>Zapytanie <code>JOIN</code> pozwala na pobieranie danych z wielu tabel. Przykład z <code>INNER JOIN</code>:</p>
+            <pre><code>SELECT zamowienia.id, użytkownicy.imie, użytkownicy.nazwisko, zamowienia.data_zamowienia
+FROM zamowienia
+INNER JOIN użytkownicy ON zamowienia.uzytkownik_id = użytkownicy.id
+WHERE zamowienia.data_zamowienia > '2023-01-01';
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>INNER JOIN</code>: Łączy dane tylko wtedy, gdy istnieje dopasowanie w obu tabelach.</li>
+                <li><code>ON zamowienia.uzytkownik_id = użytkownicy.id</code>: Określa warunek łączenia (klucz obcy).</li>
+                <li><code>WHERE</code>: Filtruje wyniki, np. tylko zamówienia po 2023-01-01.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>7. Podzapytania</h2>
+            <p>Podzapytania pozwalają na używanie wyników jednego zapytania w innym. Przykład:</p>
+            <pre><code>SELECT imie, nazwisko
+FROM użytkownicy
+WHERE id IN (
+    SELECT uzytkownik_id
+    FROM zamowienia
+    WHERE data_zamowienia > '2023-01-01'
+);
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>SELECT id FROM zamowienia</code>: Wewnętrzne zapytanie, które wybiera <code>id</code> użytkowników z zamówieniami po 2023-01-01.</li>
+                <li><code>WHERE id IN</code>: Pobiera użytkowników, których identyfikatory pasują do wyników podzapytania.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>8. Funkcje agregujące</h2>
+            <p>Funkcje agregujące pozwalają na analizowanie danych w tabelach. Przykład:</p>
+            <pre><code>SELECT COUNT(*) AS liczba_uzytkownikow,
+       AVG(DATEDIFF(CURRENT_DATE, data_rejestracji)) AS srednia_dni_w_bazie
+FROM użytkownicy;
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>COUNT(*)</code>: Zlicza liczbę wszystkich rekordów.</li>
+                <li><code>AVG(DATEDIFF(CURRENT_DATE, data_rejestracji))</code>: Oblicza średnią liczbę dni od daty rejestracji do dziś.</li>
+            </ul>
+        </section>
+		 <section class="mb-5">
+            <h2>9. Opcje sortowania</h2>
+            <p>Sortowanie wyników w MySQL odbywa się za pomocą klauzuli <code>ORDER BY</code>. Oto szczegółowe przykłady:</p>
+            <pre><code>SELECT *
+FROM użytkownicy
+ORDER BY nazwisko ASC;</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>ASC</code>: Sortuje wyniki w porządku rosnącym (od A do Z dla tekstu, od najmniejszej do największej liczby).</li>
+                <li><code>DESC</code>: Sortuje wyniki w porządku malejącym (od Z do A dla tekstu, od największej do najmniejszej liczby).</li>
+            </ul>
+            <pre><code>SELECT *
+FROM użytkownicy
+ORDER BY data_rejestracji DESC;</code></pre>
+            <p>Wyniki są posortowane od najnowszych do najstarszych dat.</p>
+            <p>Możliwe jest sortowanie według wielu kolumn:</p>
+            <pre><code>SELECT *
+FROM użytkownicy
+ORDER BY nazwisko ASC, imie ASC;</code></pre>
+            <p>Wyniki są najpierw sortowane według <code>nazwisko</code>, a w przypadku powtórzeń według <code>imie</code>.</p>
+        </section>
+        <section class="mb-5">
+            <h2>10. Grupowanie danych</h2>
+            <p>Klauzula <code>GROUP BY</code> umożliwia grupowanie wyników na podstawie jednej lub więcej kolumn. Przykład:</p>
+            <pre><code>SELECT COUNT(*) AS liczba_uzytkownikow, data_rejestracji
+FROM użytkownicy
+GROUP BY data_rejestracji;</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li>Zapytanie grupuje rekordy według daty rejestracji.</li>
+                <li><code>COUNT(*)</code>: Liczy liczbę użytkowników zarejestrowanych każdego dnia.</li>
+            </ul>
+            <p>Możliwe jest grupowanie i sortowanie wyników:</p>
+            <pre><code>SELECT data_rejestracji, COUNT(*) AS liczba
+FROM użytkownicy
+GROUP BY data_rejestracji
+ORDER BY liczba DESC;</code></pre>
+            <p>Wyniki są posortowane według liczby użytkowników w każdym dniu (od największej liczby do najmniejszej).</p>
+        </section>
+        <section class="mb-5">
+            <h2>11. Funkcje agregujące z grupowaniem</h2>
+            <p>Funkcje agregujące takie jak <code>SUM</code>, <code>AVG</code>, czy <code>MAX</code> mogą być używane z klauzulą <code>GROUP BY</code>:</p>
+            <pre><code>SELECT data_rejestracji, AVG(DATEDIFF(CURRENT_DATE, data_rejestracji)) AS srednia_dni
+FROM użytkownicy
+GROUP BY data_rejestracji;</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>AVG(DATEDIFF(...))</code>: Oblicza średnią liczbę dni od rejestracji dla każdej grupy.</li>
+                <li><code>GROUP BY data_rejestracji</code>: Grupuje wyniki według daty rejestracji.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>12. Wyrażenia warunkowe w SELECT</h2>
+            <p>MySQL pozwala używać wyrażeń warunkowych za pomocą <code>CASE</code> w zapytaniach:</p>
+            <pre><code>SELECT imie, nazwisko,
+       CASE
+           WHEN DATEDIFF(CURRENT_DATE, data_rejestracji) < 30 THEN 'Nowy użytkownik'
+           ELSE 'Stały użytkownik'
+       END AS status
+FROM użytkownicy;</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>CASE</code>: Tworzy kolumnę zależną od warunków.</li>
+                <li><code>WHEN</code>: Określa warunek (np. rejestracja w ciągu ostatnich 30 dni).</li>
+                <li><code>ELSE</code>: Ustawia wartość domyślną, jeśli żaden warunek nie został spełniony.</li>
+            </ul>
+        </section>
+        <section class="mb-5">
+            <h2>13. Dodawanie użytkowników do bazy danych</h2>
+            <p>Zapytanie <code>CREATE USER</code> pozwala na dodanie nowego użytkownika do bazy danych. Przykład:</p>
+            <pre><code>CREATE USER 'nowy_uzytkownik'@'localhost' IDENTIFIED BY 'haslo123';
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>CREATE USER</code>: Tworzy nowego użytkownika.</li>
+                <li><code>'nowy_uzytkownik'@'localhost'</code>: Określa nazwę użytkownika i host, z którego użytkownik może się łączyć.</li>
+                <li><code>IDENTIFIED BY 'haslo123'</code>: Ustawia hasło dla nowego użytkownika.</li>
+            </ul>
+        </section>
+
+        <section class="mb-5">
+            <h2>14. Nadawanie uprawnień użytkownikom</h2>
+            <p>Zapytanie <code>GRANT</code> pozwala na nadanie uprawnień użytkownikom. Przykład:</p>
+            <pre><code>GRANT SELECT, INSERT, UPDATE ON baza_danych.* TO 'nowy_uzytkownik'@'localhost';
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>GRANT</code>: Nadaje uprawnienia.</li>
+                <li><code>SELECT, INSERT, UPDATE</code>: Określa uprawnienia, które mają być nadane.</li>
+                <li><code>ON baza_danych.*</code>: Określa bazę danych i tabele, do których uprawnienia mają być nadane.</li>
+                <li><code>TO 'nowy_uzytkownik'@'localhost'</code>: Określa użytkownika, któremu nadawane są uprawnienia.</li>
+            </ul>
+        </section>
+
+        <section class="mb-5">
+            <h2>15. Usuwanie użytkowników z bazy danych</h2>
+            <p>Zapytanie <code>DROP USER</code> pozwala na usunięcie użytkownika z bazy danych. Przykład:</p>
+            <pre><code>DROP USER 'nowy_uzytkownik'@'localhost';
+</code></pre>
+            <p>Opis:</p>
+            <ul>
+                <li><code>DROP USER</code>: Usuwa użytkownika.</li>
+                <li><code>'nowy_uzytkownik'@'localhost'</code>: Określa nazwę użytkownika i host, z którego użytkownik może się łączyć.</li>
+            </ul>
+        </section>
+        
+        
+    </main>
+    <footer class="text-center my-4">
+        <p>&copy; dxb1l</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
